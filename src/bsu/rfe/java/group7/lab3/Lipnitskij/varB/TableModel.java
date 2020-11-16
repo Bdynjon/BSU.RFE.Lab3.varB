@@ -1,5 +1,12 @@
 package bsu.rfe.java.group7.lab3.Lipnitskij.varB;
 
+import java.awt.FlowLayout;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+
 import javax.swing.table.AbstractTableModel;
 
 public class TableModel extends AbstractTableModel {
@@ -61,16 +68,49 @@ public class TableModel extends AbstractTableModel {
 
 	public Object getValueAt(int arg0, int arg1) {
 		double x = from + step*arg0;
+		Double result;
+	    result = coef[0];
+	
+	    for(int i=1; i<coef.length; i++)
+	    {
+		    result *= x;
+		    result += coef[i];
+	    }
+	    
 		if (arg1==0) {
 		return x;
-		} else {
-		Double result;
-		
-		
+		} else if ( arg1 ==1 ) {
+		    
 		
 		return result;
 		}
-
-	}
+		else
+		{
+			double val = result;
+			
+			String vs =Double.toString(val);
+			
+			int k= 0;
+			
+			for( int i=vs.length()-1; i>0; i--)
+			{
+				if( (double)vs.charAt(i) != 0 ) 
+				{
+					k=i;
+					break;
+				}
+			}
+			
+			k = k-(Double.toString((int)val).length()-2);
+			
+			
+			if( ((val / 100) >= 1) || ( k>=3) )
+			{
+				return true;
+			}
+			else return false;
+			
+		}  
+	} 
 
 }

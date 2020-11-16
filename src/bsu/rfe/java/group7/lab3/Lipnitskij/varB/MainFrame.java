@@ -43,6 +43,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem saveToTextMenuItem;
 	private JMenuItem saveToGraphicsMenuItem;
 	private JMenuItem searchValueMenuItem;
+	private JMenuItem AboutProgramMenuItem;
 
 	private JTextField textFieldFrom;
 	private JTextField textFieldTo;
@@ -72,6 +73,13 @@ public class MainFrame extends JFrame {
 		menuBar.add(tableMenu);
 		JMenu Spravka = new JMenu("Справка");
 		menuBar.add(Spravka);
+		
+		Action AboutProgram = new AbstractAction("О программе") {
+			public void actionPerformed(ActionEvent event) {
+			JOptionPane.showMessageDialog(MainFrame.this,"Липницкий 7 группа","О программе",JOptionPane.INFORMATION_MESSAGE);
+			}
+		};
+		AboutProgramMenuItem = Spravka.add(AboutProgram);
 		
 		Action saveToTextAction = new AbstractAction("Сохранить в текстовый файл") {
 			public void actionPerformed(ActionEvent event) {
@@ -105,10 +113,18 @@ public class MainFrame extends JFrame {
 
 		Action searchValueAction = new AbstractAction("Найти значение многочлена") {
 			public void actionPerformed(ActionEvent event) {
-			String value = JOptionPane.showInputDialog(MainFrame.this,"Введите значение для поиска", "Поиск значения",JOptionPane.QUESTION_MESSAGE);
+				String value = JOptionPane.showInputDialog(MainFrame.this,"Введите значение для поиска", "Поиск значения",JOptionPane.QUESTION_MESSAGE);
+				try {
+					
+					
+					double v = Double.valueOf(value);
+					
+					render.setNeedle(v);
+					getContentPane().repaint();
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(MainFrame.this,"Ошибка в формате записи числа с плавающей точкой","Ошибочный формат числа", JOptionPane.WARNING_MESSAGE);
+			}
 			
-			render.setNeedle(value);
-			getContentPane().repaint();
 			}
 		};
 		searchValueMenuItem = tableMenu.add(searchValueAction);
