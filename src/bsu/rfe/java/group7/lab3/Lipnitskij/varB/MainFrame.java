@@ -97,7 +97,7 @@ public class MainFrame extends JFrame {
 		saveToTextMenuItem.setEnabled(false);
 
 		
-		Action saveToGraphicstAction = new AbstractAction("Сохранить данные для построения графика файл") {
+		Action saveToGraphicstAction = new AbstractAction("Сохранить данные для построения графика") {
 			public void actionPerformed(ActionEvent event) {
 				if (fileChooser==null) {
 					fileChooser = new JFileChooser();
@@ -115,8 +115,6 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				String value = JOptionPane.showInputDialog(MainFrame.this,"Введите значение для поиска", "Поиск значения",JOptionPane.QUESTION_MESSAGE);
 				try {
-					
-					
 					double v = Double.valueOf(value);
 					
 					render.setNeedle(v);
@@ -261,7 +259,7 @@ public class MainFrame extends JFrame {
 		
 		for (int i = 0; i<data.getRowCount(); i++) {
 			out.writeDouble((Double)data.getValueAt(i,0));
-		    out.writeDouble((Double)data.getValueAt(i,0));
+		    out.writeDouble((Double)data.getValueAt(i,1));
 		}
 		out.close();
 		} catch (Exception e) {
